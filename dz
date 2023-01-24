@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace TV
+{
+
+
+    internal class TV
+    {
+        public int Channel = 1;
+        public int Limit = 10;
+        public TV()
+        {
+            string a;
+            Console.WriteLine($"Лимит каналов: {Limit}");
+            do
+            {
+                Console.WriteLine($"\nТекущий канал: {Channel}");
+                Console.WriteLine($"\t1 - Следущий канал\n\t2 - Предыдущий канал\n\t3 - Выбор канала\n\t4 - Выход");
+                Console.Write("Ваш выбор: ");
+                a = Console.ReadLine();
+                switch (a)
+                {
+                    case "1":
+                        {
+                            NextChannel();
+                            break;
+                        }                    
+                    case "2":
+                        {
+                            PreviousChannel();
+                            break;
+                        }
+                    case "3":
+                        {
+                            Console.Write("Введите число: ");
+                            int number = Convert.ToInt32(Console.ReadLine());
+                            if (number > 10)
+                            {
+                                Console.WriteLine("Такого канала не существует!\n");
+
+                            }
+                            MoveToChannel(number);
+                            break;
+                        }
+                }
+            }
+            while (a != "4");
+        }
+        public void NextChannel()
+        {
+            Channel++;
+            if (Channel > Limit)
+                Channel = 1;
+        }
+        public void PreviousChannel()
+        {
+            Channel--;
+            if (Channel < 1)
+                Channel = Limit;
+        }
+
+        public void MoveToChannel(int number)
+        {
+            Channel = number;
+            if (number > Limit)
+            {
+                Channel = 1;
+            }
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            TV tv = new TV();
+        }
+    }
+}
